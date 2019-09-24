@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Student Database</h2>
+<div class="sort">
+  <button mat-raised-button  color = 'primary' [disabled]='disable()' (click) = 'sortAlp()'>Sort List By Names</button>
+  <button class="last" mat-raised-button  color = 'primary' [disabled]='disable()' (click) = 'sortNum()' >Sort List By Ages</button>
+  <i class="material-icons" (click) = 'reset()'>highlight_off</i>
+</div>
+<mat-dialog-content>
+</mat-dialog-content>
+<mat-table class="table" [dataSource]="dataSource" class="mat-elevation-z8 table"  *ngIf='schoolData?.length'>
+    <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[column.id]}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions" >
+        <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+           <button *ngIf='studentsList?.length' class='actionBtn'  mat-raised-button color='warn' (click) = 'delete(element)'>Delete</button>
+        </mat-cell>
+      </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color = 'warn'>Close</button>
+</mat-dialog-actions>

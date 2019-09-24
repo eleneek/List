@@ -1,0 +1,36 @@
+<h3>Add School</h3>
+<form class='form' [formGroup] = 'schoolForm'>
+  <mat-form-field>
+    <input matInput placeholder="School Name" formControlName="name">
+    <mat-error>
+      Please Enter School Name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Street" formControlName="street">
+    <mat-error>
+      Please Enter Street Address
+    </mat-error>
+  </mat-form-field>
+  <button (click)='add()' class='add' color='primary' mat-raised-button [disabled]='schoolForm.invalid || checkName() '>Add School</button>
+</form>
+
+<p *ngIf='checkName()'> School is already in list</p>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8 table"  *ngIf='schoolData?.length'>
+
+  <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}} </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element[column.id]}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="actions" >
+      <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+         <button class='actionBtn'  mat-raised-button color='primary' (click) = 'openDialog(element)'>Add</button>
+         <button class='actionBtn'  mat-raised-button color='primary' (click) = 'openData(element)'>View Students</button>
+         <button class='actionBtn'  mat-raised-button color='warn' (click) = 'delete(element)'>Delete</button>
+      </mat-cell>
+    </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -1,0 +1,17 @@
+.table {
+  width: 700px;
+}
+.sort {
+  button {
+    margin-bottom: 10px;
+    margin-left: 6px;
+  }
+  .last {
+    position: relative;
+  }
+}
+i {
+  cursor: pointer;
+  position: absolute;
+  margin-top: 6px;
+}

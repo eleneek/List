@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Add Student</h2>
+<mat-dialog-content>
+    <form class='form' class='form' [formGroup] = 'addStudentForm'>
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" (change)='change()'>
+        <mat-error>
+          Please Enter Email
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Fullname" formControlName="fullName">
+        <mat-error>
+          Please Enter Fullname
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-select formControlName="age" placeholder="Age" (click) = 'addAge()'>
+            <mat-option *ngFor='let age of ages' [value] = 'age'>
+              {{age}}
+            </mat-option>
+            <mat-error>
+              Please Choose age
+            </mat-error>
+          </mat-select>
+      </mat-form-field>
+    </form>
+</mat-dialog-content>
+<p *ngIf ='checkName()'>Student with this name or email already exists!</p>
+
+<mat-dialog-actions>
+  <button mat-raised-button color='primary' [disabled]='addStudentForm.invalid || checkName()' (click) = 'add()'>Add Student</button>
+  <button mat-raised-button mat-dialog-close color = 'warn'>Cancel</button>
+</mat-dialog-actions>
